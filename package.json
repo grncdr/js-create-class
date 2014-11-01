@@ -1,0 +1,14 @@
+{
+  "name": "create-class",
+  "version": "1.0.0",
+  "description": "Create classes, powerful features, no fluff.",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "author": "Stephen Sugden <me@stephensugden.com>",
+  "license": "MIT",
+  "dependencies": {
+    "inherits": "^2.0.1"
+  }
+}
