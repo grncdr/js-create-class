@@ -97,7 +97,7 @@ var Foo = createClass({
 assert.equal(Foo.hello, 'world');
 ```
 
-The second type of mixin is an object, which will be treated exactly like a new class definition, except that the `constructor` property (if present) will be ignored.
+The second type of mixin is an object, which will be treated exactly like a new class definition, except that the `constructor` property (if present) will be ignored. Mixins are applied in order, see [construction order](#class-construction-algorithm) for more details.
 
 ### `inherit`
 
@@ -115,6 +115,36 @@ var HelloStream = createClass({
 
 var hellos = new HelloStream();
 assert(hellos instanceof Readable);
+```
+
+## Class construction algorithm
+
+Calling `createClass` performs the following steps:
+
+1. Checks for the `constructor` property. If not defined, an empty constructor is created. This empty constructor will call the parent constructor if one is defined.
+2. Checks for the `inherit` property. If defined, the constructor function is
+   made to inherit from the value of `inherit`: `inherits(Constructor, definition.inherit)`
+3. Applies the class definition as though it were a mixin to the constructor.
+
+The process for applying mixins (defined in [apply-mixin.js][]) is:
+
+1. If mixin is a function, pass it the Constructor function.
+2. Else, if mixin is **not** an object, a `TypeError` will be thrown.
+3. If the mixin defines a `static` property, copy each property of `mixin.static` to the constructor using `setProperty`.
+4. If the mixin defines an `include` property, apply each of the mixins in that array to the constructor in order. (Thus recursing back to step 1 for each mixin).
+5. If the mixin was a function, stop.
+6. Otherwise, copy each property of the mixin to the constructor prototype using `setProperty`.
+
+Finally, the definition of `setProperty` is trivial:
+
+```
+function setProperty (target, name, value) {
+  if (typeof value === 'object' && value.isDescriptor) {
+    Object.defineProperty(target, name, value);
+  } else {
+    target[name] = value;
+  }
+}
 ```
 
 ## License
