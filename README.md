@@ -101,7 +101,7 @@ The second type of mixin is an object, which will be treated exactly like a new 
 
 ### `inherit`
 
-The value if `inherit` should be another class/constructor function that you would like to serve as the prototype of this one. The inheritance will be set up using [`inherits`](https://npm.im/inherits). The super/parent class will be accessible via the `super_` property of the constructor: 
+The value of `inherit` should be another class/constructor function that you would like to serve as the prototype of this one. The inheritance will be set up using [`inherits`](https://npm.im/inherits). The super/parent class will be accessible via the `super_` property of the constructor: 
 
 ```javascript
 var Readable = require('streams').Readable;
