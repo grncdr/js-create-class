@@ -10,5 +10,21 @@
   "license": "MIT",
   "dependencies": {
     "inherits": "^2.0.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grncdr/js-create-class.git"
+  },
+  "keywords": [
+    "class",
+    "constructor",
+    "mixin",
+    "inherit",
+    "inheritance"
+  ],
+  "bugs": {
+    "url": "https://github.com/grncdr/js-create-class/issues"
+  },
+  "homepage": "https://github.com/grncdr/js-create-class"
 }
